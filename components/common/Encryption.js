@@ -3,7 +3,7 @@ import CryptoJS from 'react-native-crypto-js';
 export default class Encryption {
     //Encrypt data
     static encrypt(plainText) {
-        const secret_key = "r4u7x!A%C*F-JaNdRgUkXp2s5v8y/B?E";
+        const secret_key = "NdRgUkXp2s5vr4u7x!A%C*F-Ja8y/B?E";
         const iv = CryptoJS.lib.WordArray.random(16);
 
         try {
@@ -28,7 +28,7 @@ export default class Encryption {
 
     //Decrypt data
     static decrypt(encryptedText) {
-        const secret_key = "r4u7x!A%C*F-JaNdRgUkXp2s5v8y/B?E";
+        const secret_key = "NdRgUkXp2s5vr4u7x!A%C*F-Ja8y/B?E";
 
         // Extract IV and ciphertext
         const combinedData = CryptoJS.enc.Base64.parse(encryptedText);
