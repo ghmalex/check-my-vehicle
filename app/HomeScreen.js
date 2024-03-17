@@ -14,7 +14,10 @@
 import React, { Component } from 'react'
 import { SafeAreaView, Text, View } from 'react-native';
 import styles from '../styles/styles';
+
+//Import components
 import VehicleSearch from '../components/home/VehicleSearch';
+//import VehicleSearchHistory from '../components/home/VehicleSearchHistory';
 
 export default class HomeScreen extends Component {
   render() {
@@ -27,6 +30,7 @@ export default class HomeScreen extends Component {
           <Text style={styles.heading}>Saved vehicles</Text>
 
           <Text style={styles.heading}>Search history</Text>
+          
 
         </View>
 

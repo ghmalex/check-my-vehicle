@@ -9,10 +9,28 @@ const styles = StyleSheet.create({
         backgroundColor: COLOURS.white,
         flex: 1,
     },
+    verticalContainer:{
+        width: "100%",
+        flexDirection: 'column',
+    },
+    horizontalContainer:{
+        width: "100%",
+        flexDirection: 'row',
+        marginBottom: SIZES.small,
+    },
     heading: {
         fontSize: SIZES.xlarge,
         fontWeight: 500,
-
+    },
+    headingMedium: {
+        fontSize: SIZES.large,
+        fontWeight: 500,
+        marginBottom: SIZES.small,
+    },
+    headingMediumUppercase: {
+        fontSize: SIZES.large,
+        fontWeight: 500,
+        textTransform: 'uppercase',
     },
     textInput: {
         width: "100%",
@@ -67,6 +85,80 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         padding: SIZES.large,
+    },
+    containerInfoCard: {
+        width: "100%",
+        flexDirection: 'row',
+        backgroundColor: COLOURS.grayLight,
+        padding: SIZES.medium,
+        marginTop: SIZES.medium,
+        borderRadius: SIZES.medium,
+    },
+    containerInfoCardGreen: {
+        width: "100%",
+        flexDirection: 'row',
+        backgroundColor: COLOURS.greenLight,
+        padding: SIZES.medium,
+        marginTop: SIZES.medium,
+        borderRadius: SIZES.medium,
+    },
+    containerInfoCardRed: {
+        width: "100%",
+        flexDirection: 'row',
+        backgroundColor: COLOURS.redLight,
+        padding: SIZES.medium,
+        marginTop: SIZES.medium,
+        borderRadius: SIZES.medium,
+    },
+    textKey: {
+        color: COLOURS.gray,
+        flex: 1,
+    },
+    textValue: {
+        color: COLOURS.black,
+        flex: 3,
+    },
+    textKeySecondary: {
+        color: COLOURS.gray,
+        flex: 2,
+    },
+    textValueSecondary: {
+        color: COLOURS.black,
+        flex: 3,
+    },
+    textGreen: {
+        color: COLOURS.green,
+    },
+    textRed: {
+        color: COLOURS.redDark,
+    },
+    containerIcon: {
+        width: 50,
+        height: 50,
+        backgroundColor: COLOURS.white,
+        borderRadius: SIZES.medium,
+        marginRight: SIZES.medium,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    icon: {
+        width: 40,
+        height: 40,
+    },
+    registrationNumberContainer:{
+        flex: 4,
+        backgroundColor: COLOURS.yellow,
+        marginTop: SIZES.medium,
+        borderRadius: SIZES.small,
+        borderLeftColor: COLOURS.primary,
+        borderLeftWidth: SIZES.xlarge,
+        height: 50,
+        justifyContent: 'center',
+    },
+    registrationNumberText:{
+        textTransform: 'uppercase',
+        fontSize: SIZES.large,
+        marginLeft: SIZES.medium,
     },
     //Authentication screen
     containerAuthentication: {

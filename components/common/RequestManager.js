@@ -7,7 +7,7 @@ import UserToken from './UserToken';
 export default class RequestManager extends Component {
 
     //Send requests to the authentication server
-    static async sendRequestAuthentication(endpoint, data) {
+    static async sendRequest(endpoint, data) {
         try {
             //Get API KEY from the environmental variable
             //const apiKey = AUTHENTICATION_API_KEY;
@@ -36,35 +36,6 @@ export default class RequestManager extends Component {
             //Something went wrong
             //throw new Error('Error in the request', error);
             console.error('Error in the request:', error);
-        }
-    }
-
-    //Send requests to the authentication server
-    static async sendRequestDVLA(data) {
-        try {
-            //Get API KEY from the environmental variable
-            //const apiKey = DVLA_API_KEY;
-            const apiKey = "lNI7SCWAy156onvl5AyUI5Ck1WD6EX4R34x3Whre";
-
-            //Registration number should be already added to data
-            //The name of the variable should be 'registrationNumber'
-
-            //Send request
-            const response = await axios.post(`https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles`, data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': "lNI7SCWAy156onvl5AyUI5Ck1WD6EX4R34x3Whre",
-                },
-            });
-
-            console.log('DVLA API response code:', response.status);
-
-            //Return response
-            return response.data;
-
-        } catch (error) {
-            //Something went wrong
-            throw new Error('Error in the request');
         }
     }
 }

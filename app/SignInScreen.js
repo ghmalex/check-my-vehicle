@@ -53,7 +53,7 @@ export default class SignInScreen extends Component {
 
     //Send request to sign up
     try {
-      const response = await RequestManager.sendRequestAuthentication('sign_in', {
+      const response = await RequestManager.sendRequest('sign_in', {
         email: emailEncrypted,
         password: passwordEncrypted,
       });

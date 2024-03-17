@@ -69,7 +69,7 @@ export default class UserToken  {
             }
 
             //Send request to to validate user token
-            const response = await RequestManager.sendRequestAuthentication('check_user_token', {
+            const response = await RequestManager.sendRequest('check_user_token', {
                 user_token: storedUserToken
             });
 

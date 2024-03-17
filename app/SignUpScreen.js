@@ -76,7 +76,7 @@ export default class SignUpScreen extends Component {
 
         //Send request to sign up
         try {
-            const response = await RequestManager.sendRequestAuthentication('sign_up', {
+            const response = await RequestManager.sendRequest('sign_up', {
                 first_name: firstNameEncrypted,
                 last_name: lastNameEncrypted,
                 email: emailEncrypted,

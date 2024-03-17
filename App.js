@@ -14,8 +14,9 @@
 
 import React, { Component } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { View, Image, Text } from 'react-native-web';
+import { View, Image, Text, Pressable } from 'react-native-web';
 import styles from './styles/styles';
 
 //Import screens
@@ -25,8 +26,19 @@ import SignUpScreen from './app/SignUpScreen';
 import HomeScreen from './app/HomeScreen';
 import VehicleScreen from './app/VehicleScreen';
 
-//Create stack navigation
+//Create stack and drawer navigation
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+//Hamburger menu
+const HamburgerMenu = ({ navigation }) => (
+  <Pressable onPress={() => navigation.toggleDrawer()}>
+    <Image
+      source={require('./assets/icons/menu.png')}
+      style={{ width: 30, height: 30, marginRight: 10 }}
+    />
+  </Pressable>
+);
 
 //Main component of the app to initiate the screens
 export default class CheckMyVehicle extends Component {
@@ -65,6 +77,7 @@ export default class CheckMyVehicle extends Component {
                 </View>
               ),
               headerLeft: null,
+              headerRight: () => <HamburgerMenu navigation={navigation} />,
              }}
           />
           <Stack.Screen
