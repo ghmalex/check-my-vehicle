@@ -56,7 +56,7 @@ export default class VehicleSearch extends Component {
                     value={this.state.vehicleRegistration}
                     placeholder="SEARCH..."
                     keyboardType="default"
-                    maxLength={7}
+                    maxLength={8}
                 />
 
                 <Pressable

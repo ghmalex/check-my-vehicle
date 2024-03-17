@@ -21,6 +21,15 @@ export default class VehicleRegistration extends Component {
         super(props);
     }
 
+    //Save vehicle
+    onPressSave = () => {
+        //Get data
+        const registrationNumber = this.props.registrationNumber;
+
+        alert("Saving vehicle: " + registrationNumber);
+
+    }
+
     render() {
         return (
             <View style={styles.horizontalContainer}>

@@ -59,10 +59,7 @@ export default class SignInScreen extends Component {
       });
       //Check response
       if (response.result === 'successful') {
-        //Sign up successful
-        //Display message
-        const responseMessage = response.message;
-        alert(responseMessage);
+        //Sign in successful
 
         //Set user token
         const userToken = response.user_token;

@@ -18,7 +18,7 @@ import RequestManager from './RequestManager';
 //Key for the Async Storage
 const USER_TOKEN_KEY = 'userToken';
 
-export default class UserToken  {
+export default class UserToken {
     //Get user token
     static async getUserToken() {
         try {
@@ -48,8 +48,21 @@ export default class UserToken  {
     //Delete user token
     static async deleteUserToken() {
         try {
-            //Delete user token
-            await AsyncStorage.removeItem(USER_TOKEN_KEY);
+            //Get user token
+            const storedUserToken = await AsyncStorage.getItem(USER_TOKEN_KEY);
+
+            //Check user token
+            if (storedUserToken !== null) {
+                //User token is  stored
+                //Send request to to devalidate user token
+                await RequestManager.sendRequest('devalidate_user_token', {
+                    user_token: storedUserToken
+                });
+
+                //Delete user token
+                await AsyncStorage.removeItem(USER_TOKEN_KEY);
+            }
+
         } catch (error) {
             //Something went wrong
             console.error('Error deleting user token from AsyncStorage:', error);
@@ -78,7 +91,7 @@ export default class UserToken  {
                 //User token is valid
                 return true;
 
-            }else if (response.result === 'invalid') {
+            } else if (response.result === 'invalid') {
                 //User token is not valid
                 //Delete user token
                 this.deleteUserToken();

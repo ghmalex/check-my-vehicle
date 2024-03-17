@@ -12,9 +12,10 @@
 //
 
 import React, { Component } from 'react'
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, View } from 'react-native';
 import styles from '../styles/styles';
 import RequestManager from '../components/common/RequestManager';
+import LocalDatabaseManager from '../components/common/LocalDatabaseManager';
 import {
     getDatabase,
     insertSearchHistory
@@ -88,6 +89,20 @@ export default class VehicleScreen extends Component {
                 this.setState({ motExpiryDate: response.motExpiryDate });
                 this.setState({ wheelplan: response.wheelplan });
                 this.setState({ monthOfFirstRegistration: response.monthOfFirstRegistration });
+
+                //Add to search history
+                try {
+                    console.log('Inserting data');
+                    await LocalDatabaseManager.initializeDatabase();
+                    const success = await LocalDatabaseManager.insertData('ABC123');
+                    if (success) {
+                      console.log('Data inserted successfully');
+                    } else {
+                      console.log('Failed to insert data');
+                    }
+                  } catch (error) {
+                    console.log('Error inserting data:', error);
+                  }
 
             } else if (response.result === 'error_invalid_user_token') {
                 //Invalid user token
