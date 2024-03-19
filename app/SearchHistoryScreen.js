@@ -5,20 +5,21 @@
 //
 // Github: https://github.com/ghmalex/check-my-vehicle.git
 //
-// VehicleSearchHistory.js
-// Vehicle search history component, get the previously searched records from the local database.
+// SearchHistoryScreen.js
+// Search history screen component, responsible getting search history.
 //
-// Last Updated: 13/03/2024
+// Last Updated: 19/03/2024
 //
 
 import React, { Component } from 'react'
-import { View, Text } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
+import styles from '../styles/styles';
+import LocalDatabaseManager from '../components/common/LocalDatabaseManager';
 
 //Import components
-import VehicleCard from '../cards/VehicleCard';
-import LocalDatabaseManager from '../common/LocalDatabaseManager';
+import VehicleCard from '../components/cards/VehicleCard';
 
-export default class VehicleSearchHistory extends Component {
+export default class VehicleScreen extends Component {
 
     //Class constructor
     constructor(props) {
@@ -44,18 +45,13 @@ export default class VehicleSearchHistory extends Component {
 
     }
 
-
     render() {
 
-        //Only show the first 5 search history items
-        const searchHistorySliced = this.state.searchHistory.slice(0, 5);
 
         return (
-            <View>
-                {searchHistorySliced.length === 0 ? (
-                    <Text>No search history found.</Text>
-                ) : (
-                    searchHistorySliced.map((item, index) => (
+            <SafeAreaView style={styles.container}>
+                <View style={styles.wrapper}>
+                    {this.state.searchHistory.map((item, index) => (
                         <VehicleCard
                             navigation={this.props.navigation}
                             key={index}
@@ -63,9 +59,13 @@ export default class VehicleSearchHistory extends Component {
                             make={item.make}
                             searchDate={item.searchDate}
                         />
-                    ))
-                )}
-            </View>
+
+                    ))}
+
+
+                </View>
+
+            </SafeAreaView>
         );
     }
 }

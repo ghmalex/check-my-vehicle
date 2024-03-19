@@ -17,7 +17,8 @@ import styles from '../styles/styles';
 
 //Import components
 import VehicleSearch from '../components/home/VehicleSearch';
-//import VehicleSearchHistory from '../components/home/VehicleSearchHistory';
+import VehicleSearchHistory from '../components/home/VehicleSearchHistory';
+import SavedVehicles from '../components/home/SavedVehicles';
 
 export default class HomeScreen extends Component {
   render() {
@@ -28,8 +29,10 @@ export default class HomeScreen extends Component {
           <VehicleSearch navigation={this.props.navigation} />
 
           <Text style={styles.heading}>Saved vehicles</Text>
+          <SavedVehicles navigation={this.props.navigation}/>
 
           <Text style={styles.heading}>Search history</Text>
+          <VehicleSearchHistory navigation={this.props.navigation}/>
           
 
         </View>

@@ -22,7 +22,7 @@ SAVED_VEHICLES_KEY = 'savedVehicles';
 export default class LocalDatabaseManager {
 
   //Insert search history data
-  static async insertSearchHistory(vehicleRegistration) {
+  static async insertSearchHistory(vehicleRegistration, make) {
     try {
       //Get current date in YYYY-MM-DD format
       const searchDate = new Date().toISOString().split('T')[0];
@@ -38,7 +38,7 @@ export default class LocalDatabaseManager {
       }
 
       //Add data to the search history
-      searchData.push({ vehicleRegistration, searchDate });
+      searchData.push({ vehicleRegistration, make, searchDate });
 
       //Store search history
       await AsyncStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(searchData));
@@ -69,7 +69,7 @@ export default class LocalDatabaseManager {
   }
 
   //Insert saved vehicles data
-  static async insertSavedVehicle(response) {
+  static async insertSavedVehicle(vehicle) {
     try {
 
       //Get saved vechicles
@@ -77,7 +77,7 @@ export default class LocalDatabaseManager {
       vehiclesData = vehiclesData ? JSON.parse(vehiclesData) : [];
 
       //Add data to the saved vehicles
-      vehiclesData.push({ response });
+      vehiclesData.push({ vehicle });
 
       //Store saved vehicles
       await AsyncStorage.setItem(SAVED_VEHICLES_KEY, JSON.stringify(vehiclesData));
@@ -93,6 +93,7 @@ export default class LocalDatabaseManager {
   static async getSavedVehicle() {
     try {
       //Get saved vehicle
+      console.log('Getting saved vehicles');
       const responseString = await AsyncStorage.getItem(SAVED_VEHICLES_KEY);
 
       if (responseString) {
@@ -108,6 +109,27 @@ export default class LocalDatabaseManager {
     } catch (error) {
       console.log('Error fetching saved vehicles:', error);
       return null;
+    }
+  }
+
+  //Delete saved vehicle by registration number
+  static async deleteSavedVehicleByRegistrationNumber(registrationNumber) {
+    try {
+      //Get saved vehicles
+      let savedVehicles = await AsyncStorage.getItem(SAVED_VEHICLES_KEY);
+      savedVehicles = savedVehicles ? JSON.parse(savedVehicles) : [];
+
+      //Remove vehicles with the registration number
+      const filteredVehicles = savedVehicles.filter(vehicle => vehicle.registrationNumber !== registrationNumber);
+
+      //Update the vehicles
+      await AsyncStorage.setItem(SAVED_VEHICLES_KEY, JSON.stringify(filteredVehicles));
+
+      console.log(`Vehicle with registration number ${registrationNumber} deleted successfully.`);
+
+    } catch (error) {
+      //Something went wrong
+      console.log('Error deleting saved vehicle:', error);
     }
   }
 }

@@ -12,6 +12,7 @@ import SignUpScreen from './app/SignUpScreen';
 import HomeScreen from './app/HomeScreen';
 import VehicleScreen from './app/VehicleScreen';
 import SignOutScreen from './app/SignOutScreen';
+import SearchHistoryScreen from './app/SearchHistoryScreen';
 
 // Create stack navigation
 const Stack = createStackNavigator();
@@ -73,8 +74,14 @@ const DrawerNavigator = () => (
         headerLeft: null,
       })}
       component={HomeScreen} />
+
+    <Drawer.Screen name="Search history"
+      options={{ headerShown: true }}
+      component={SearchHistoryScreen} />
+
     <Drawer.Screen name="Sign out"
       options={{ headerShown: false }}
       component={SignOutScreen} />
+
   </Drawer.Navigator>
 );

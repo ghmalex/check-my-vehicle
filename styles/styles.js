@@ -155,6 +155,30 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
     },
+    //Vehicle card
+    registrationNumberCardContainer:{
+        backgroundColor: COLOURS.yellow,
+        borderRadius: SIZES.small,
+        borderLeftColor: COLOURS.primary,
+        borderLeftWidth: SIZES.xlarge,
+        height: 50,
+        paddingLeft: SIZES.medium,
+        justifyContent: 'center',
+        flex: 3,
+    },
+    verticalCardContainer:{
+        flexDirection: 'column',
+        flex: 5,
+    },
+    containerCardIcon: {
+        width: 50,
+        height: 50,
+        backgroundColor: COLOURS.white,
+        borderRadius: SIZES.medium,
+        marginRight: SIZES.medium,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     registrationNumberText:{
         textTransform: 'uppercase',
         fontSize: SIZES.large,

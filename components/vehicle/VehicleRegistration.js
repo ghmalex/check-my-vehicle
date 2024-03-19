@@ -24,10 +24,35 @@ export default class VehicleRegistration extends Component {
 
     //Save vehicle
     onPressSave = () => {
-        //Get data
-        const registrationNumber = this.props.registrationNumber;
 
-        alert("Saving vehicle: " + registrationNumber);
+        //Save vehicle data to the local storage
+        try{
+            LocalDatabaseManager.insertSavedVehicle({
+                registrationNumber: this.props.registrationNumber,
+                taxStatus: this.props.taxStatus,
+                taxDueDate: this.props.taxDueDate,
+                motStatus: this.props.motStatus,
+                make: this.props.make,
+                yearOfManufacture: this.props.yearOfManufacture,
+                engineCapacity: this.props.engineCapacity,
+                co2Emissions: this.props.co2Emissions,
+                fuelType: this.props.fuelType,
+                markedForExport: this.props.markedForExport,
+                colour: this.props.colour,
+                typeApproval: this.props.typeApproval,
+                revenueWeight: this.props.revenueWeight,
+                dateOfLastV5CIssued: this.props.dateOfLastV5CIssued,
+                motExpiryDate: this.props.motExpiryDate,
+                wheelplan: this.props.wheelplan,
+                monthOfFirstRegistration: this.props.monthOfFirstRegistration,
+            });
+
+            const registrationNumber = this.props.registrationNumber;
+            alert("Saved vehicle: " + registrationNumber);
+        }catch{
+            //Something went wrong
+            console.log('Error saving vehicle:', error);
+        }
 
     }
 

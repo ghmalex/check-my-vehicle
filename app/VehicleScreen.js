@@ -16,10 +16,6 @@ import { SafeAreaView, ScrollView, View } from 'react-native';
 import styles from '../styles/styles';
 import RequestManager from '../components/common/RequestManager';
 import LocalDatabaseManager from '../components/common/LocalDatabaseManager';
-import {
-    getDatabase,
-    insertSearchHistory
-} from '../components/common/LocalDatabaseManager';
 
 //Import components
 import VehicleRegistration from '../components/vehicle/VehicleRegistration';
@@ -89,15 +85,20 @@ export default class VehicleScreen extends Component {
                 this.setState({ motExpiryDate: response.motExpiryDate });
                 this.setState({ wheelplan: response.wheelplan });
                 this.setState({ monthOfFirstRegistration: response.monthOfFirstRegistration });
-        
+
                 //Add to search history
                 try {
-                    console.log('Inserting data');
+                    console.log('Inserting search history data');
                     const vehicleRegistration = response.registrationNumber;
-                    await LocalDatabaseManager.insertSearchHistory(vehicleRegistration);
+                    const make = response.make;
+                    await LocalDatabaseManager.insertSearchHistory(vehicleRegistration, make);
+
                 } catch (error) {
                     console.log('Error inserting data:', error);
                 }
+
+                await LocalDatabaseManager.getSearchHistory();
+                await LocalDatabaseManager.getSavedVehicle();
 
             } else if (response.result === 'error_invalid_user_token') {
                 //Invalid user token
@@ -131,9 +132,7 @@ export default class VehicleScreen extends Component {
             <SafeAreaView style={styles.container}>
                 <View style={styles.wrapper}>
 
-                    <VehicleRegistration
-                        registrationNumber={this.state.registrationNumber}
-                    />
+                    <VehicleRegistration {...this.state} />
 
                     <VehicleInfoCardPrimary
                         make={this.state.make}

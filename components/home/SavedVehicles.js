@@ -5,10 +5,10 @@
 //
 // Github: https://github.com/ghmalex/check-my-vehicle.git
 //
-// VehicleSearchHistory.js
-// Vehicle search history component, get the previously searched records from the local database.
+// SavedVehicles.js
+// Saved vehicles component, get the previously saved records from the local database.
 //
-// Last Updated: 13/03/2024
+// Last Updated: 19/03/2024
 //
 
 import React, { Component } from 'react'
@@ -18,13 +18,13 @@ import { View, Text } from 'react-native';
 import VehicleCard from '../cards/VehicleCard';
 import LocalDatabaseManager from '../common/LocalDatabaseManager';
 
-export default class VehicleSearchHistory extends Component {
+export default class SavedVehicles extends Component {
 
     //Class constructor
     constructor(props) {
         super(props);
         this.state = {
-            searchHistory: [],
+            savedVehicles: [],
         };
     }
 
@@ -34,33 +34,31 @@ export default class VehicleSearchHistory extends Component {
         //Get search history data
         try {
             //Get search history and set state
-            const history = await LocalDatabaseManager.getSearchHistory();
-            this.setState({ searchHistory: history });
+            const savedVehicles = await LocalDatabaseManager.getSavedVehicle();
+            this.setState({ savedVehicles: savedVehicles });
 
         } catch (error) {
             //Something went wrong
-            console.log('Error fetching search history:', error);
+            console.log('Error fetching saved vehicles:', error);
         }
 
     }
 
 
     render() {
-
-        //Only show the first 5 search history items
-        const searchHistorySliced = this.state.searchHistory.slice(0, 5);
+        const { savedVehicles } = this.state;
 
         return (
             <View>
-                {searchHistorySliced.length === 0 ? (
-                    <Text>No search history found.</Text>
+                {savedVehicles === null ? (
+                    <Text>No saved vehicles found.</Text>
                 ) : (
-                    searchHistorySliced.map((item, index) => (
+                    savedVehicles.map((item, index) => (
                         <VehicleCard
                             navigation={this.props.navigation}
                             key={index}
-                            vehicleRegistration={item.vehicleRegistration}
-                            make={item.make}
+                            vehicleRegistration={item.vehicle.registrationNumber}
+                            make={item.vehicle.make}
                             searchDate={item.searchDate}
                         />
                     ))
