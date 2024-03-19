@@ -13,6 +13,7 @@ import HomeScreen from './app/HomeScreen';
 import VehicleScreen from './app/VehicleScreen';
 import SignOutScreen from './app/SignOutScreen';
 import SearchHistoryScreen from './app/SearchHistoryScreen';
+import SavedVehicleScreen from './app/SavedVehicleScreen';
 
 // Create stack navigation
 const Stack = createStackNavigator();
@@ -49,6 +50,12 @@ export default class CheckMyVehicle extends Component {
             name="VehicleScreen"
             component={VehicleScreen}
             options={{ title: 'View vehicle' }}
+          />
+
+          <Stack.Screen
+            name="SavedVehicleScreen"
+            component={SavedVehicleScreen}
+            options={{ title: 'View saved vehicle' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

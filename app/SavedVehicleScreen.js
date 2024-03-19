@@ -5,8 +5,8 @@
 //
 // Github: https://github.com/ghmalex/check-my-vehicle.git
 //
-// VehicleScreen.js
-// Vehicle screen component, responsible getting vehicle information components.
+// SavedVehicleScreen.js
+// Saved vehicle screen component, responsible getting vehicle information components.
 //
 // Last Updated: 12/03/2024
 //
@@ -18,13 +18,13 @@ import RequestManager from '../components/common/RequestManager';
 import LocalDatabaseManager from '../components/common/LocalDatabaseManager';
 
 //Import components
-import VehicleRegistration from '../components/vehicle/VehicleRegistration';
+import VehicleRegistrationSaved from '../components/vehicle/VehicleRegistrationSaved';
 import VehicleInfoCardPrimary from '../components/vehicle/VehicleInfoCardPrimary';
 import MOTCard from '../components/vehicle/MOTCard';
 import TaxCard from '../components/vehicle/TaxCard';
 import VehicleInfoCardSecondary from '../components/vehicle/VehicleInfoCardSecondary';
 
-export default class VehicleScreen extends Component {
+export default class SavedVehicleScreen extends Component {
 
     //Class constructor
     constructor(props) {
@@ -55,42 +55,39 @@ export default class VehicleScreen extends Component {
     async componentDidMount() {
 
         //Get vehicle registration
-        const { vehicleRegistration } = await this.props.route.params;
+        const { vehicleRegistration } = this.props.route.params;
 
-        //Make request to get car details
-        //Use the main server as a proxy as DVLA does not allow requests from localhost
+        //Get vehicle details from the local storage
         try {
-            const response = await RequestManager.sendRequest('get_vehicle', {
-                vehicle_registration: vehicleRegistration,
-            });
+            const response = await LocalDatabaseManager.getSavedVehicleByRegistrationNumber(vehicleRegistration);
 
             //Check response
-            if (response.result === 'successful') {
+            if (response !== null) {
                 //Successful vehicle check
                 //Get vehicle details
-                this.setState({ registrationNumber: response.registrationNumber });
-                this.setState({ taxStatus: response.taxStatus });
-                this.setState({ taxDueDate: response.taxDueDate });
-                this.setState({ motStatus: response.motStatus });
-                this.setState({ make: response.make });
-                this.setState({ yearOfManufacture: response.yearOfManufacture });
-                this.setState({ engineCapacity: response.engineCapacity });
-                this.setState({ co2Emissions: response.co2Emissions });
-                this.setState({ fuelType: response.fuelType });
-                this.setState({ markedForExport: response.markedForExport });
-                this.setState({ colour: response.colour });
-                this.setState({ typeApproval: response.typeApproval });
-                this.setState({ revenueWeight: response.revenueWeight });
-                this.setState({ dateOfLastV5CIssued: response.dateOfLastV5CIssued });
-                this.setState({ motExpiryDate: response.motExpiryDate });
-                this.setState({ wheelplan: response.wheelplan });
-                this.setState({ monthOfFirstRegistration: response.monthOfFirstRegistration });
+                this.setState({ registrationNumber: response.vehicle.registrationNumber });
+                this.setState({ taxStatus: response.vehicle.taxStatus });
+                this.setState({ taxDueDate: response.vehicle.taxDueDate });
+                this.setState({ motStatus: response.vehicle.motStatus });
+                this.setState({ make: response.vehicle.make });
+                this.setState({ yearOfManufacture: response.vehicle.yearOfManufacture });
+                this.setState({ engineCapacity: response.vehicle.engineCapacity });
+                this.setState({ co2Emissions: response.vehicle.co2Emissions });
+                this.setState({ fuelType: response.vehicle.fuelType });
+                this.setState({ markedForExport: response.vehicle.markedForExport });
+                this.setState({ colour: response.vehicle.colour });
+                this.setState({ typeApproval: response.vehicle.typeApproval });
+                this.setState({ revenueWeight: response.vehicle.revenueWeight });
+                this.setState({ dateOfLastV5CIssued: response.vehicle.dateOfLastV5CIssued });
+                this.setState({ motExpiryDate: response.vehicle.motExpiryDate });
+                this.setState({ wheelplan: response.vehicle.wheelplan });
+                this.setState({ monthOfFirstRegistration: response.vehicle.monthOfFirstRegistration });
 
                 //Add to search history
                 try {
                     console.log('Inserting search history data');
-                    const vehicleRegistration = response.registrationNumber;
-                    const make = response.make;
+                    const vehicleRegistration = response.vehicle.registrationNumber;
+                    const make = response.vehicle.make;
                     await LocalDatabaseManager.insertSearchHistory(vehicleRegistration, make);
 
                 } catch (error) {
@@ -99,19 +96,6 @@ export default class VehicleScreen extends Component {
 
                 await LocalDatabaseManager.getSearchHistory();
                 await LocalDatabaseManager.getSavedVehicle();
-
-            } else if (response.result === 'error_invalid_user_token') {
-                //Invalid user token
-                const responseMessage = response.message;
-                alert(responseMessage);
-
-                //Redirect user to sign out
-                this.props.navigation.replace("SignOutScreen");
-
-            } else if (response.result === 'error') {
-                //Something went wrong
-                const responseMessage = response.message;
-                alert(responseMessage);
 
             } else {
                 //Something went wrong
@@ -132,8 +116,8 @@ export default class VehicleScreen extends Component {
             <SafeAreaView style={styles.container}>
                 <View style={styles.wrapper}>
 
-                    <VehicleRegistration 
-                    registrationNumber={this.state.registrationNumber}
+                    <VehicleRegistrationSaved
+                        registrationNumber={this.state.registrationNumber}
                         taxStatus={this.state.taxStatus}
                         taxDueDate={this.state.taxDueDate}
                         motStatus={this.state.motStatus}
@@ -151,7 +135,7 @@ export default class VehicleScreen extends Component {
                         wheelplan={this.state.wheelplan}
                         monthOfFirstRegistration={this.state.monthOfFirstRegistration}
                         navigation={this.props.navigation}
-                     />
+                    />
 
                     <VehicleInfoCardPrimary
                         make={this.state.make}

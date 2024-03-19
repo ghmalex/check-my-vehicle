@@ -5,8 +5,8 @@
 //
 // Github: https://github.com/ghmalex/check-my-vehicle.git
 //
-// VehicleCard.js
-// Vehicle info component, responsible for displaying information about a vehicle in the vehicle history.
+// SavedVehicleCard.js
+// Vehicle info component, responsible for displaying information about a saved vehicle.
 //
 // Last Updated: 13/03/2024
 //
@@ -15,7 +15,7 @@ import React, { Component } from 'react'
 import { View, Text, Image, Pressable } from 'react-native';
 import styles from '../../styles/styles';
 
-export default class VehicleCard extends Component {
+export default class SavedVehicleCard extends Component {
     //Class constructor
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ export default class VehicleCard extends Component {
         const vehicleRegistration = this.props.vehicleRegistration;
 
         //Redirect to vehicle page 
-        this.props.navigation.navigate("VehicleScreen", { vehicleRegistration });
+        this.props.navigation.navigate("SavedVehicleScreen", { vehicleRegistration });
 
     }
 

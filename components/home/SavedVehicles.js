@@ -15,7 +15,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native';
 
 //Import components
-import VehicleCard from '../cards/VehicleCard';
+import SavedVehicleCard from '../cards/SavedVehicleCard';
 import LocalDatabaseManager from '../common/LocalDatabaseManager';
 
 export default class SavedVehicles extends Component {
@@ -54,7 +54,7 @@ export default class SavedVehicles extends Component {
                     <Text>No saved vehicles found.</Text>
                 ) : (
                     savedVehicles.map((item, index) => (
-                        <VehicleCard
+                        <SavedVehicleCard
                             navigation={this.props.navigation}
                             key={index}
                             vehicleRegistration={item.vehicle.registrationNumber}
