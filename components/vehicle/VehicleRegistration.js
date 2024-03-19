@@ -14,6 +14,7 @@
 import React, { Component } from 'react'
 import { View, Text, Pressable } from 'react-native';
 import styles from '../../styles/styles';
+import LocalDatabaseManager from '../common/LocalDatabaseManager';
 
 export default class VehicleRegistration extends Component {
     //Class constructor

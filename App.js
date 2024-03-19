@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { View, Image, Text, Pressable } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import styles from './styles/styles';
 
 // Import screens
@@ -59,7 +59,7 @@ export default class CheckMyVehicle extends Component {
 const DrawerNavigator = () => (
   <Drawer.Navigator initialRouteName="Home">
     <Drawer.Screen name="Home"
-      options={({ navigation }) => ({
+      options={() => ({
         title: 'Home',
         headerTitle: () => (
           <View style={styles.logoContainer}>

@@ -1,4 +1,17 @@
-import React, { Component } from 'react';
+//
+// App: Check My Vehicle
+// Author: Alex Ghimici
+// Student ID: 20136277
+//
+// Github: https://github.com/ghmalex/check-my-vehicle.git
+//
+// RequestManager.js
+// Request manager class to send request to the web server.
+//
+// Last Updated: 18/03/2024
+//
+
+import { Component } from 'react';
 import axios from 'axios';
 //import { AUTHENTICATION_API_KEY, DVLA_API_KEY } from '@env';
 import UserToken from './UserToken';

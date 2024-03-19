@@ -1,6 +1,20 @@
+//
+// App: Check My Vehicle
+// Author: Alex Ghimici
+// Student ID: 20136277
+//
+// Github: https://github.com/ghmalex/check-my-vehicle.git
+//
+// Encryption.js
+// CryptoJS component for encryption and decryption of data.
+//
+// Last Updated: 18/03/2024
+//
+
+import { Component } from 'react';
 import CryptoJS from 'react-native-crypto-js';
 
-export default class Encryption {
+export default class Encryption extends Component {
     //Encrypt data
     static encrypt(plainText) {
         const secret_key = "NdRgUkXp2s5vr4u7x!A%C*F-Ja8y/B?E";

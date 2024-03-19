@@ -89,20 +89,15 @@ export default class VehicleScreen extends Component {
                 this.setState({ motExpiryDate: response.motExpiryDate });
                 this.setState({ wheelplan: response.wheelplan });
                 this.setState({ monthOfFirstRegistration: response.monthOfFirstRegistration });
-
+        
                 //Add to search history
                 try {
                     console.log('Inserting data');
-                    await LocalDatabaseManager.initializeDatabase();
-                    const success = await LocalDatabaseManager.insertData('ABC123');
-                    if (success) {
-                      console.log('Data inserted successfully');
-                    } else {
-                      console.log('Failed to insert data');
-                    }
-                  } catch (error) {
+                    const vehicleRegistration = response.registrationNumber;
+                    await LocalDatabaseManager.insertSearchHistory(vehicleRegistration);
+                } catch (error) {
                     console.log('Error inserting data:', error);
-                  }
+                }
 
             } else if (response.result === 'error_invalid_user_token') {
                 //Invalid user token
@@ -120,14 +115,6 @@ export default class VehicleScreen extends Component {
             } else {
                 //Something went wrong
                 alert("Something went wrong, please try again later");
-            }
-
-            //Record search in the search history
-            try {
-                const db = await getDatabase();
-                await insertSearchHistory("KR13RFN", db);
-            } catch (error) {
-                console.error('Error getting database:', error);
             }
 
         } catch (error) {

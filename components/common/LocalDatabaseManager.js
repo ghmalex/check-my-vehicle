@@ -1,71 +1,113 @@
+//
+// App: Check My Vehicle
+// Author: Alex Ghimici
+// Student ID: 20136277
+//
+// Github: https://github.com/ghmalex/check-my-vehicle.git
+//
 // LocalDatabaseManager.js
-import SQLite from 'react-native-sqlite-2';
+// SQLite 2 database manager component, responsible for fetching and inserting data to the local database.
+//
+// Last Updated: 18/03/2024
+//
 
-const db = SQLite.openDatabase({ name: 'mydb.db', createFromLocation: 1 });
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-class LocalDatabaseManager {
-  static async initializeDatabase() {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-          'CREATE TABLE IF NOT EXISTS vehicles (id INTEGER PRIMARY KEY AUTOINCREMENT, vehicle_registration TEXT)',
-          [],
-          () => {
-            console.log('Database initialized successfully');
-            resolve();
-          },
-          error => {
-            console.log('Error initializing database:', error);
-            reject(error);
-          }
-        );
-      });
-    });
+//Key for the Async Storage
+const SEARCH_HISTORY_KEY = 'searchHistory';
+const MAX_SEARCH_HISTORY_LENGTH = 10;
+
+SAVED_VEHICLES_KEY = 'savedVehicles';
+
+export default class LocalDatabaseManager {
+
+  //Insert search history data
+  static async insertSearchHistory(vehicleRegistration) {
+    try {
+      //Get current date in YYYY-MM-DD format
+      const searchDate = new Date().toISOString().split('T')[0];
+
+      //Get search history
+      let searchData = await AsyncStorage.getItem(SEARCH_HISTORY_KEY);
+      searchData = searchData ? JSON.parse(searchData) : [];
+
+      //Remove the oldest record if the limit is exceeded
+      if (searchData.length >= MAX_SEARCH_HISTORY_LENGTH) {
+        //Remove the oldest record
+        searchData.shift();
+      }
+
+      //Add data to the search history
+      searchData.push({ vehicleRegistration, searchDate });
+
+      //Store search history
+      await AsyncStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(searchData));
+
+    } catch (error) {
+      console.log('Error inserting data:', error);
+    }
   }
 
-  static async insertData(vehicleRegistration) {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-          'INSERT INTO vehicles (vehicle_registration) VALUES (?)',
-          [vehicleRegistration],
-          (_, { rowsAffected }) => {
-            if (rowsAffected > 0) {
-              console.log('Data inserted successfully');
-              resolve(true);
-            } else {
-              console.log('Failed to insert data');
-              resolve(false);
-            }
-          },
-          error => {
-            console.log('Error inserting data:', error);
-            reject(error);
-          }
-        );
-      });
-    });
+  //Get search history data
+  static async getSearchHistory() {
+    try {
+      //Get search history
+      const searchData = await AsyncStorage.getItem(SEARCH_HISTORY_KEY);
+
+      //Parse search history
+      if (searchData) {
+        const data = JSON.parse(searchData);
+        console.log('All search history data stored:', data);
+        return data;
+      } else {
+        console.log('No search data found');
+        return [];
+      }
+    } catch (error) {
+      console.log('Error fetching search data:', error);
+    }
   }
 
-  static async getAllData() {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-          'SELECT * FROM vehicles',
-          [],
-          (_, { rows }) => {
-            const data = rows.raw();
-            console.log('All data:', data);
-            resolve(data);
-          },
-          error => {
-            console.log('Error fetching data:', error);
-            reject(error);
-          }
-        );
-      });
-    });
+  //Insert saved vehicles data
+  static async insertSavedVehicle(response) {
+    try {
+
+      //Get saved vechicles
+      let vehiclesData = await AsyncStorage.getItem(SAVED_VEHICLES_KEY);
+      vehiclesData = vehiclesData ? JSON.parse(vehiclesData) : [];
+
+      //Add data to the saved vehicles
+      vehiclesData.push({ response });
+
+      //Store saved vehicles
+      await AsyncStorage.setItem(SAVED_VEHICLES_KEY, JSON.stringify(vehiclesData));
+
+      console.log('Vehicle saved successfully');
+
+    } catch (error) {
+      console.log('Error saving vehicle:', error);
+    }
+  }
+
+  //Get saved vehicles data
+  static async getSavedVehicle() {
+    try {
+      //Get saved vehicle
+      const responseString = await AsyncStorage.getItem(SAVED_VEHICLES_KEY);
+
+      if (responseString) {
+        //Parse saved vehicle
+        const responseObject = JSON.parse(responseString);
+        console.log('Retrieved saved vehicles:', responseObject);
+        return responseObject;
+
+      } else {
+        console.log('No saved vehicles found');
+        return null;
+      }
+    } catch (error) {
+      console.log('Error fetching saved vehicles:', error);
+      return null;
+    }
   }
 }
-
-export default LocalDatabaseManager;
