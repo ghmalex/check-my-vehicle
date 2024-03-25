@@ -41,25 +41,21 @@ export default class SavedVehicleCard extends Component {
     render() {
 
         return (
-            <View>
-                <Pressable style={styles.containerInfoCard} onPress={this.onPressVehicleCard}>
-                    <View style={styles.containerCardIcon}>
-                        <Image
-                            source={require('../../assets/icons/vehicle.png')}
-                            style={styles.icon}
-                        />
-                    </View>
-                    <View style={styles.verticalCardContainer}>
-                        <Text style={styles.headingMediumUppercase}>{this.props.make}</Text>
-                        <Text >Searched on {this.formatBritishDate(this.props.searchDate)}</Text>
-                    </View>
-                    <View style={styles.registrationNumberCardContainer}>
-                        <Text style={styles.headingMediumUppercase}>{this.props.vehicleRegistration}</Text>
-                    </View>
-                </Pressable>
+            <Pressable style={styles.containerInfoSavedVehicleCard} onPress={this.onPressVehicleCard}>
+                <View style={styles.containerCardIcon}>
+                    <Image
+                        source={require('../../assets/icons/vehicle.png')}
+                        style={styles.icon}
+                    />
+                </View>
+                <View style={styles.verticalCardContainer}>
+                    <Text style={styles.headingMediumUppercase}>{this.props.make}</Text>
+                </View>
+                <View style={styles.registrationNumberSavedVehicleCardContainer}>
+                    <Text style={styles.registrationNumberSavedVehicleCardText}>{this.props.vehicleRegistration}</Text>
+                </View>
 
-
-            </View>
+            </Pressable>
         );
     }
 }

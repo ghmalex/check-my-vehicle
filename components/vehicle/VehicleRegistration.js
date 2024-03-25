@@ -50,8 +50,8 @@ export default class VehicleRegistration extends Component {
             const registrationNumber = this.props.registrationNumber;
             alert("Saved vehicle: " + registrationNumber);
 
-            //Replace navigation to the saved vehicle screen
-            this.props.navigation.replace("SavedVehicleScreen", { registrationNumber });
+            //Replace navigation to the home screen
+            this.props.navigation.replace("HomeScreen");
         }catch{
             //Something went wrong
             console.log('Error saving vehicle:', error);

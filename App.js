@@ -14,6 +14,9 @@ import VehicleScreen from './app/VehicleScreen';
 import SignOutScreen from './app/SignOutScreen';
 import SearchHistoryScreen from './app/SearchHistoryScreen';
 import SavedVehicleScreen from './app/SavedVehicleScreen';
+import SavedVehiclesScreen from './app/SavedVehiclesScreen';
+import MyAccountScreen from './app/MyAccountScreen';
+import DeleteMyAccountScreen from './app/DeleteMyAccountScreen';
 
 // Create stack navigation
 const Stack = createStackNavigator();
@@ -40,6 +43,16 @@ export default class CheckMyVehicle extends Component {
             name="SignUpScreen"
             component={SignUpScreen}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignOutScreen"
+            component={SignOutScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="DeleteMyAccountScreen"
+            component={DeleteMyAccountScreen}
+            options={{ title: 'Delete my account' }}
           />
           <Stack.Screen
             name="HomeScreen"
@@ -82,9 +95,17 @@ const DrawerNavigator = () => (
       })}
       component={HomeScreen} />
 
+    <Drawer.Screen name="My account"
+      options={{ headerShown: true }}
+      component={MyAccountScreen} />
+
     <Drawer.Screen name="Search history"
       options={{ headerShown: true }}
       component={SearchHistoryScreen} />
+
+    <Drawer.Screen name="Saved vehicles"
+      options={{ headerShown: true }}
+      component={SavedVehiclesScreen} />
 
     <Drawer.Screen name="Sign out"
       options={{ headerShown: false }}

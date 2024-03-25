@@ -5,8 +5,8 @@
 //
 // Github: https://github.com/ghmalex/check-my-vehicle.git
 //
-// SearchHistoryScreen.js
-// Search history screen component, responsible getting search history.
+// SavedVehiclesScreen.js
+// Search vehicles screen component, responsible getting saved vehicles.
 //
 // Last Updated: 19/03/2024
 //
@@ -17,15 +17,15 @@ import styles from '../styles/styles';
 import LocalDatabaseManager from '../components/common/LocalDatabaseManager';
 
 //Import components
-import VehicleCard from '../components/cards/VehicleCard';
+import SavedVehicleCardFull from '../components/cards/SavedVehicleCardFull';
 
-export default class SearchHistoryScreen extends Component {
+export default class SavedVehiclesScreen extends Component {
 
     //Class constructor
     constructor(props) {
         super(props);
         this.state = {
-            searchHistory: [],
+            savedVehicles: [],
         };
     }
 
@@ -34,13 +34,13 @@ export default class SearchHistoryScreen extends Component {
     async componentDidMount() {
         //Get search history data
         try {
-            //Get search history and set state
-            const history = await LocalDatabaseManager.getSearchHistory();
-            this.setState({ searchHistory: history });
+            //Get saved vehicles
+            const savedVehicles = await LocalDatabaseManager.getSavedVehicle();
+            this.setState({ savedVehicles: savedVehicles });
 
         } catch (error) {
             //Something went wrong
-            console.log('Error fetching search history:', error);
+            console.log('Error fetching saved vehicles:', error);
         }
 
     }
@@ -52,17 +52,17 @@ export default class SearchHistoryScreen extends Component {
             <ScrollView style={styles.container}>
                 <View style={styles.wrapper}>
 
-                    {this.state.searchHistory.length === 0 ? (
-                        <Text>No search history found.</Text>
+                    {this.state.savedVehicles === null || this.state.savedVehicles.length === 0 ? (
+                        <Text>No saved vehicles found.</Text>
                     ) : (
                         <FlatList
-                            data={this.state.searchHistory}
+                            data={this.state.savedVehicles}
                             renderItem={({ item, index }) => (
-                                <VehicleCard
+                                <SavedVehicleCardFull
                                     navigation={this.props.navigation}
                                     key={index}
-                                    vehicleRegistration={item.vehicleRegistration}
-                                    make={item.make}
+                                    vehicleRegistration={item.vehicle.registrationNumber}
+                                    make={item.vehicle.make}
                                     searchDate={item.searchDate}
                                 />
                             )}

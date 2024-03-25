@@ -12,7 +12,7 @@
 //
 
 import React, { Component } from 'react'
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
 //Import components
 import VehicleCard from '../cards/VehicleCard';
@@ -52,18 +52,23 @@ export default class VehicleSearchHistory extends Component {
 
         return (
             <View>
+
                 {searchHistorySliced.length === 0 ? (
                     <Text>No search history found.</Text>
                 ) : (
-                    searchHistorySliced.map((item, index) => (
-                        <VehicleCard
-                            navigation={this.props.navigation}
-                            key={index}
-                            vehicleRegistration={item.vehicleRegistration}
-                            make={item.make}
-                            searchDate={item.searchDate}
-                        />
-                    ))
+                    <FlatList
+                        data={searchHistorySliced}
+                        renderItem={({ item, index }) => (
+                            <VehicleCard
+                                navigation={this.props.navigation}
+                                key={index}
+                                vehicleRegistration={item.vehicleRegistration}
+                                make={item.make}
+                                searchDate={item.searchDate}
+                            />
+                        )}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
                 )}
             </View>
         );

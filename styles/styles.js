@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: SIZES.xlarge,
         fontWeight: 500,
+        marginTop: SIZES.large,
     },
     headingMedium: {
         fontSize: SIZES.large,
@@ -62,6 +63,34 @@ const styles = StyleSheet.create({
     },
     buttonInactiveText: {
         color: COLOURS.primary,
+        textAlign: "center",
+        fontSize: SIZES.large
+    },
+    buttonInactiveRed: {
+        width: "100%",
+        backgroundColor: COLOURS.white,
+        padding: SIZES.small,
+        marginTop: SIZES.medium,
+        borderRadius: SIZES.medium,
+        borderColor: COLOURS.redDark,
+        borderWidth: 2,
+    },
+    buttonInactiveRedText: {
+        color: COLOURS.redDark,
+        textAlign: "center",
+        fontSize: SIZES.large
+    },
+    buttonInactiveRed2: {
+        width: "100%",
+        backgroundColor: COLOURS.redDark,
+        padding: SIZES.small,
+        marginTop: SIZES.medium,
+        borderRadius: SIZES.medium,
+        borderColor: COLOURS.redDark,
+        borderWidth: 2,
+    },
+    buttonInactiveRed2Text: {
+        color: COLOURS.white,
         textAlign: "center",
         fontSize: SIZES.large
     },
@@ -156,6 +185,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     //Vehicle card
+    containerInfoSavedVehicleCard: {
+        flexDirection: 'column',
+        backgroundColor: COLOURS.grayLight,
+        padding: SIZES.medium,
+        marginTop: SIZES.medium,
+        borderRadius: SIZES.medium,
+        marginRight: SIZES.medium,
+    },
     registrationNumberCardContainer:{
         backgroundColor: COLOURS.yellow,
         borderRadius: SIZES.small,
@@ -166,9 +203,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 3,
     },
+    registrationNumberSavedVehicleCardContainer:{
+        backgroundColor: COLOURS.yellow,
+        borderRadius: SIZES.small,
+        borderLeftColor: COLOURS.primary,
+        borderLeftWidth: SIZES.large,
+        height: 40,
+        paddingLeft: SIZES.medium,
+        justifyContent: 'center',
+        marginTop: SIZES.small,
+    },
+    registrationNumberSavedVehicleCardText:{
+        textTransform: 'uppercase',
+        fontSize: SIZES.large,
+        marginRight: SIZES.medium,
+    },
     verticalCardContainer:{
         flexDirection: 'column',
         flex: 5,
+    },
+    verticalSavedVehicleCardContainer:{
+        flex: 5,
+        justifyContent: 'center',
     },
     containerCardIcon: {
         width: 50,

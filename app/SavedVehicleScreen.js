@@ -14,7 +14,6 @@
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, View } from 'react-native';
 import styles from '../styles/styles';
-import RequestManager from '../components/common/RequestManager';
 import LocalDatabaseManager from '../components/common/LocalDatabaseManager';
 
 //Import components
@@ -93,9 +92,6 @@ export default class SavedVehicleScreen extends Component {
                 } catch (error) {
                     console.log('Error inserting data:', error);
                 }
-
-                await LocalDatabaseManager.getSearchHistory();
-                await LocalDatabaseManager.getSavedVehicle();
 
             } else {
                 //Something went wrong

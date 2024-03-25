@@ -61,6 +61,11 @@ export default class UserToken {
 
                 //Delete user token
                 await AsyncStorage.removeItem(USER_TOKEN_KEY);
+
+                //Remove search history and saved vehicles from the local storage
+                //This prevents that if someone else signes in to access other's data
+                //as these are ssaved to the local storage
+                await AsyncStorage.clear();
             }
 
         } catch (error) {

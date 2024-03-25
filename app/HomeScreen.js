@@ -12,7 +12,7 @@
 //
 
 import React, { Component } from 'react'
-import { SafeAreaView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import styles from '../styles/styles';
 
 //Import components
@@ -23,7 +23,7 @@ import SavedVehicles from '../components/home/SavedVehicles';
 export default class HomeScreen extends Component {
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.wrapper}>
 
           <VehicleSearch navigation={this.props.navigation} />
@@ -37,7 +37,7 @@ export default class HomeScreen extends Component {
 
         </View>
 
-      </SafeAreaView>
+      </ScrollView>
     );
   }
 }

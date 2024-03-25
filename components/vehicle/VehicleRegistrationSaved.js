@@ -31,8 +31,10 @@ export default class VehicleRegistrationSaved extends Component {
             await LocalDatabaseManager.deleteSavedVehicleByRegistrationNumber(registrationNumber);
             alert("Unsaved vehicle: " + registrationNumber);
 
-            //Replace navigation to the vehicle screen
-            this.props.navigation.replace("VehicleScreen", { registrationNumber });
+            //Replace navigation to the home screen
+            this.props.navigation.replace("HomeScreen");
+
+
         }catch{
             //Something went wrong
             console.log('Error unsaving vehicle:', error);

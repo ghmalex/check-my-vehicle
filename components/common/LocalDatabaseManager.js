@@ -146,6 +146,37 @@ export default class LocalDatabaseManager {
     }
   }
 
+  //Check if vehicle is saved
+  static async checkVehicleSavedById(registrationNumber) {
+    try {
+      //Get saved vehicles
+      const responseString = await AsyncStorage.getItem(SAVED_VEHICLES_KEY);
+
+      if (responseString) {
+        //Parse saved vehicles
+        const savedVehicles = JSON.parse(responseString);
+
+        //Find the vehicle with the given registration number
+        const vehicle = savedVehicles.find(entry => entry.vehicle.registrationNumber === registrationNumber);
+
+        //Check if vehicle found
+        if (vehicle) {
+          console.log('Retrieved saved vehicle by registration number:', vehicle);
+          return true;
+        } else {
+          console.log('No saved vehicle found with the provided registration number:', registrationNumber);
+          return false;
+        }
+      } else {
+        console.log('No saved vehicles found');
+        return false;
+      }
+    } catch (error) {
+      console.log('Error fetching saved vehicles:', error);
+      return false;
+    }
+  }
+
 
   //Delete saved vehicle by registration number
   static async deleteSavedVehicleByRegistrationNumber(registrationNumber) {
