@@ -13,8 +13,8 @@
 
 import { Component } from 'react';
 import axios from 'axios';
-//import { AUTHENTICATION_API_KEY, DVLA_API_KEY } from '@env';
 import UserToken from './UserToken';
+//import { AUTHENTICATION_API_KEY} from '@env';
 
 
 export default class RequestManager extends Component {
@@ -24,9 +24,11 @@ export default class RequestManager extends Component {
         try {
             //Get API KEY from the environmental variable
             //const apiKey = AUTHENTICATION_API_KEY;
+
+            //If environmental variables cannot be loaded, alternatively:
             const apiKey = "hjkjResgh3D87df6827d5h65sEWi387twj";
 
-            //Get User Token
+            //Get User Token, use Promise for the async method
             const [storedUserToken] = await Promise.all([
                 UserToken.getUserToken(),
             ]);

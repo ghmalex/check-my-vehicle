@@ -1,3 +1,16 @@
+//
+// App: Check My Vehicle
+// Author: Alex Ghimici
+// Student ID: 20136277
+//
+// Github: https://github.com/ghmalex/check-my-vehicle.git
+//
+// styles.js
+// Stylesheet for the application
+//
+// Last Updated: 12/03/2024
+//
+
 import { StyleSheet } from "react-native";
 import { SIZES } from "../constants/sizes";
 import { COLOURS } from "../constants/colours";

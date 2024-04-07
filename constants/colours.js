@@ -1,3 +1,16 @@
+//
+// App: Check My Vehicle
+// Author: Alex Ghimici
+// Student ID: 20136277
+//
+// Github: https://github.com/ghmalex/check-my-vehicle.git
+//
+// colours.js
+// Colours constants, get the colours used in the app.
+//
+// Last Updated: 07/04/2024
+//
+
 const COLOURS = {
     primary: "#1F69F8",
     secondary: "#4885FB",

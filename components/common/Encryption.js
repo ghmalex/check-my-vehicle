@@ -13,11 +13,18 @@
 
 import { Component } from 'react';
 import CryptoJS from 'react-native-crypto-js';
+//import { CRYPTO_KEY} from '@env';
 
 export default class Encryption extends Component {
     //Encrypt data
     static encrypt(plainText) {
+        
+        //Get key
+        //const secret_key = CRYPTO_KEY;
+
+        //If environmental variables cannot be loaded, alternatively:
         const secret_key = "NdRgUkXp2s5vr4u7x!A%C*F-Ja8y/B?E";
+
         const iv = CryptoJS.lib.WordArray.random(16);
 
         try {
@@ -42,6 +49,11 @@ export default class Encryption extends Component {
 
     //Decrypt data
     static decrypt(encryptedText) {
+
+        //Get key
+        //const secret_key = CRYPTO_KEY;
+
+        //If environmental variables cannot be loaded, alternatively:
         const secret_key = "NdRgUkXp2s5vr4u7x!A%C*F-Ja8y/B?E";
 
         // Extract IV and ciphertext

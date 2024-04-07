@@ -22,6 +22,7 @@ import VehicleInfoCardPrimary from '../components/vehicle/VehicleInfoCardPrimary
 import MOTCard from '../components/vehicle/MOTCard';
 import TaxCard from '../components/vehicle/TaxCard';
 import VehicleInfoCardSecondary from '../components/vehicle/VehicleInfoCardSecondary';
+import CleanAirZoneCard from '../components/vehicle/CleanAirZoneCard';
 
 export default class SavedVehicleScreen extends Component {
 
@@ -46,6 +47,7 @@ export default class SavedVehicleScreen extends Component {
             motExpiryDate: '',
             wheelplan: '',
             monthOfFirstRegistration: '',
+            cleanAirCompliant: false,
         };
     }
 
@@ -91,6 +93,47 @@ export default class SavedVehicleScreen extends Component {
 
                 } catch (error) {
                     console.log('Error inserting data:', error);
+                }
+
+                //Determine whether the vehicle is clean air zone compliant
+                //
+                //Compliance for vehicles:
+                //
+                //DIESEL: Euro 6 = cannot emit more than 80mg/km
+                //
+                //PETROL: Euro 4 = cannot emit more than 150mg/km
+                //
+
+                //Check fuel type
+                const vehicleFuelType = response.vehicle.fuelType;
+                const vehicleEmission = response.vehicle.co2Emissions;
+
+                if (vehicleFuelType === "DIESEL") {
+                    //Diesel
+                    //Check if emission is more than 80mg/km
+                    if (vehicleEmission > 80) {
+                        //Vehicle is not compliant
+                        this.setState({ cleanAirCompliant: false });
+                    } else {
+                        //Vehicle is compliant
+                        this.setState({ cleanAirCompliant: true });
+                    }
+
+                } else if (vehicleFuelType === "PETROL") {
+                    //PETROL
+                    //Check if emission is more than 150mg/km
+                    if (vehicleEmission > 150) {
+                        //Vehicle is not compliant
+                        this.setState({ cleanAirCompliant: false });
+                    } else {
+                        //Vehicle is compliant
+                        this.setState({ cleanAirCompliant: true });
+                    }
+
+                } else {
+                    //HYBRID and ELECRIC vehicles are compliant
+                    this.setState({ cleanAirCompliant: true });
+
                 }
 
             } else {
@@ -157,6 +200,10 @@ export default class SavedVehicleScreen extends Component {
                         wheelplan={this.state.wheelplan}
                         monthOfFirstRegistration={this.state.monthOfFirstRegistration}
                         co2Emissions={this.state.co2Emissions}
+                    />
+
+                    <CleanAirZoneCard
+                        cleanAirCompliant={this.state.cleanAirCompliant}
                     />
 
                 </View>

@@ -6,7 +6,8 @@
 // Github: https://github.com/ghmalex/check-my-vehicle.git
 //
 // VehicleSearchHistory.js
-// Vehicle search history component, get the previously searched records from the local database.
+// Vehicle search history component, get the previously searched records from the 
+// local database and display on the home screen.
 //
 // Last Updated: 13/03/2024
 //

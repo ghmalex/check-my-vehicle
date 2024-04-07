@@ -1,3 +1,16 @@
+//
+// App: Check My Vehicle
+// Author: Alex Ghimici
+// Student ID: 20136277
+//
+// Github: https://github.com/ghmalex/check-my-vehicle.git
+//
+// SavedVehicles.js
+// Saved vehicles component to display saved vehicle cards on the home screen
+//
+// Last Updated: 07/04/2024
+//
+
 import React, { Component } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
