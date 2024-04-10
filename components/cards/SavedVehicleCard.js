@@ -21,12 +21,6 @@ export default class SavedVehicleCard extends Component {
         super(props);
     }
 
-    //Method to convert the standard date format to British date format
-    formatBritishDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-GB');
-    }
-
     //Vehicle card press
     onPressVehicleCard = () => {
 

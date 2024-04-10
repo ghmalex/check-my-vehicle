@@ -33,6 +33,7 @@ import DeleteMyAccountScreen from './app/DeleteMyAccountScreen';
 
 //Create stack navigation
 const Stack = createStackNavigator();
+
 //Create drawer navigation
 const Drawer = createDrawerNavigator();
 

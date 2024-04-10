@@ -59,16 +59,14 @@ export default class VehicleSearchHistory extends Component {
                 ) : (
                     <FlatList
                         data={searchHistorySliced}
-                        renderItem={({ item, index }) => (
+                        renderItem={({ item }) => (
                             <VehicleCard
                                 navigation={this.props.navigation}
-                                key={index}
                                 vehicleRegistration={item.vehicleRegistration}
                                 make={item.make}
                                 searchDate={item.searchDate}
                             />
                         )}
-                        keyExtractor={(item, index) => index.toString()}
                     />
                 )}
             </View>

@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SEARCH_HISTORY_KEY = 'searchHistory';
 const MAX_SEARCH_HISTORY_LENGTH = 10;
 
-SAVED_VEHICLES_KEY = 'savedVehicles';
+const SAVED_VEHICLES_KEY = 'savedVehicles';
 
 export default class LocalDatabaseManager {
 
@@ -181,20 +181,20 @@ export default class LocalDatabaseManager {
   //Delete saved vehicle by registration number
   static async deleteSavedVehicleByRegistrationNumber(registrationNumber) {
     try {
-      // Get saved vehicles
+      //Get saved vehicles
       let savedVehicles = await AsyncStorage.getItem(SAVED_VEHICLES_KEY);
       savedVehicles = savedVehicles ? JSON.parse(savedVehicles) : [];
 
-      // Remove vehicles with the registration number
+      //Remove vehicles with the registration number
       const filteredVehicles = savedVehicles.filter(entry => entry.vehicle.registrationNumber !== registrationNumber);
 
-      // Update the vehicles by overwriting the existing data
+      //Update the vehicles by overwriting the existing data
       await AsyncStorage.setItem(SAVED_VEHICLES_KEY, JSON.stringify(filteredVehicles));
 
       console.log(`Vehicle with registration number ${registrationNumber} deleted successfully.`);
 
     } catch (error) {
-      // Something went wrong
+      //Something went wrong
       console.log('Error deleting saved vehicle:', error);
     }
   }

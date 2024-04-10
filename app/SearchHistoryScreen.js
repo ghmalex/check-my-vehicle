@@ -57,10 +57,9 @@ export default class SearchHistoryScreen extends Component {
                     ) : (
                         <FlatList
                             data={this.state.searchHistory}
-                            renderItem={({ item, index }) => (
+                            renderItem={({ item }) => (
                                 <VehicleCard
                                     navigation={this.props.navigation}
-                                    key={index}
                                     vehicleRegistration={item.vehicleRegistration}
                                     make={item.make}
                                     searchDate={item.searchDate}

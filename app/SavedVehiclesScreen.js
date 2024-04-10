@@ -57,16 +57,14 @@ export default class SavedVehiclesScreen extends Component {
                     ) : (
                         <FlatList
                             data={this.state.savedVehicles}
-                            renderItem={({ item, index }) => (
+                            renderItem={({ item }) => (
                                 <SavedVehicleCardFull
                                     navigation={this.props.navigation}
-                                    key={index}
                                     vehicleRegistration={item.vehicle.registrationNumber}
                                     make={item.vehicle.make}
                                     searchDate={item.searchDate}
                                 />
                             )}
-                            keyExtractor={(item, index) => index.toString()}
                         />
                     )}
 
